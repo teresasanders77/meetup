@@ -14,6 +14,9 @@
     "react-scripts": "3.4.3",
     "react-test-renderer": "^16.0.0-0"
   },
+  "plugins": [
+    "@babel/plugin-transform-react-jsx"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
