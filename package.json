@@ -14,9 +14,6 @@
     "react-scripts": "3.4.3",
     "react-test-renderer": "^16.0.0-0"
   },
-  "plugins": [
-    "@babel/plugin-transform-react-jsx"
-  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -43,6 +40,16 @@
   "devDependencies": {
     "enzyme": "3.0.0",
     "enzyme-adapter-react-16": "1.0.0",
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "identity-obj-proxy": "^3.0.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }
