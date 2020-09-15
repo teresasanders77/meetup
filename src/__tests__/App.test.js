@@ -56,5 +56,4 @@ describe('<App /> integration', () => {
     expect(AppWrapper.find('.event')).toHaveLength(4);
     AppWrapper.unmount();
   })
-
 });
