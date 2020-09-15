@@ -22,7 +22,8 @@ class Event extends Component {
         <div className="eventOverview">
           <p className="when">{this.props.event.local_time} - {this.props.event.local_date}</p>
           <p className="name">{this.props.event.name}</p>
-          <p className="attendees">{this.props.event.yes_rsvp_count} are going</p>
+          <p className="group">GROUP: {this.props.event.group.name}</p>
+          <i className="attendees">{this.props.event.yes_rsvp_count} people are going</i>
           <button className="details-btn" onClick={() => this.handleShowDetails()}>details</button>
         </div>
         {showDetails &&
