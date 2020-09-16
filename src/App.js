@@ -6,8 +6,17 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
 
 class App extends Component {
+
+  componentDidMount() {
+    getEvents().then(response => this.setState({ events: response }));
+  }
+
   state = {
     events: [],
+    page: null,
+    defaultCity: '',
+    lat: null,
+    lon: null
   }
 
   updateEvents = (lat, lon, page) => {
@@ -21,13 +30,13 @@ class App extends Component {
       getEvents(this.state.lat, this.state.lon, this.state.page).then(response => this.setState({ events: response }));
     }
   }
+
   render() {
     return (
-      <div className="App">
+      <div className="App" >
         <CitySearch updateEvents={this.updateEvents} />
-        <NumberOfEvents updateEvents={this.updateEvents}
-          numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
         <EventList events={this.state.events} />
+        <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
+    event: [],
     showDetails: false
   }
 
@@ -30,7 +31,8 @@ class Event extends Component {
         </div>
         {showDetails &&
           <div className="eventDetails">
-            <p className="event__Details--description">{this.props.event.description}</p>
+            <h3>Event Description: </h3>
+            <p className="event__Details--description" dangerouslySetInnerHTML={{ __html: this.props.event.description }} />
           </div>}
       </div>
     );

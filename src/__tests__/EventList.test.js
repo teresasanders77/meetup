@@ -7,7 +7,7 @@ import App from '../App';
 
 configure({ adapter: new Adapter() });
 
-describe("<EventList /> component", () => {
+describe("<App /> component", () => {
   test("render correct number of events", () => {
     const EventListWrapper = shallow(
       <EventList events={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]} />
