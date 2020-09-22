@@ -26,10 +26,10 @@ async function getSuggestions(query) {
     ];
   }
 
-  const token = await getAccessToken();
+  const token = await getToken();
 
   if (token) {
-    const url = 'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query='
+    const url = 'https://cors-anywhere.herokuapp.com/https://api.meetup.com/find/locations?&sign=true&photo-host=public&query='
       + query
       + '&access_token=' + token;
     const result = await axios.get(url);
@@ -43,10 +43,10 @@ async function getEvents(lat, lon, page) {
     return mockEvents.events;
   }
 
-  const token = await getAccessToken();
+  const token = await getToken();
 
   if (token) {
-    let url = 'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public'
+    let url = 'https://cors-anywhere.herokuapp.com/https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public'
       + '&access_token=' + token;
     // lat, lon is optional; if you have a lat and lon, you can add them
     if (lat && lon) {
@@ -64,7 +64,7 @@ async function getEvents(lat, lon, page) {
   }
 };
 
-function getAccessToken() {
+function getToken() {
   const accessToken = localStorage.getItem('access_token');
 
   if (!accessToken) {
@@ -76,7 +76,7 @@ function getAccessToken() {
       return null;
     }
 
-    return getOrRenewAccessToken('get', code);
+    return getOrRenewToken('get', code);
   }
 
   const lastSavedTime = localStorage.getItem('last_saved_time');
@@ -87,19 +87,17 @@ function getAccessToken() {
 
   // If the access_token is expired, we try to renew it by using refresh_token
   const refreshToken = localStorage.getItem('refresh_token');
-  return getOrRenewAccessToken('renew', refreshToken);
+  return getOrRenewToken('renew', refreshToken);
 };
 
-async function getOrRenewAccessToken(type, key) {
+async function getOrRenewToken(type, key) {
   let url;
   if (type === 'get') {
     // Lambda endpoint to get token by code
-    url = 'https://ovupaa70al.execute-api.us-east-1.amazonaws.com/dev/api/token/'
-      + key;
+    url = 'https://dc0saicwg3.execute-api.us-east-1.amazonaws.com/dev/api/token/' + key;
   } else if (type === 'renew') {
     // Lambda endpoint to get token by refresh_token
-    url = 'https://ovupaa70al.execute-api.us-east-1.amazonaws.com/dev/api/refresh/'
-      + key;
+    url = 'https://dc0saicwg3.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' + key;
   }
 
   // Use Axios to make a GET request to the endpoint
@@ -114,4 +112,4 @@ async function getOrRenewAccessToken(type, key) {
   return tokenInfo.data.access_token;
 }
 
-export { getSuggestions, getEvents, getAccessToken };
+export { getSuggestions, getEvents, getToken };
