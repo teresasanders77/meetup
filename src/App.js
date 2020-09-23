@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
-import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
+import { WarningAlert } from './Alert';
+
+import './App.css';
 
 class App extends Component {
-
-  componentDidMount() {
-    getEvents().then(response => this.setState({ events: response }));
-  }
 
   state = {
     events: [],
     page: null,
     defaultCity: '',
     lat: null,
-    lon: null
+    lon: null,
+    warningText: ''
+  }
+
+  componentDidMount() {
+    this.updateEvents();
+    window.addEventListener('online', this.warningAlert());
   }
 
   updateEvents = (lat, lon, page) => {
+    if (!navigator.onLine) {
+      this.setState({ warningText: "You are currently offline. Reconnect for updated, current results" });
+    }
+    else {
+      this.setState({ warningText: "" })
+    }
     if (lat && lon) {
       getEvents(lat, lon, this.state.page).then(response => this.setState({ events: response, lat, lon }));
     }
@@ -35,8 +45,9 @@ class App extends Component {
     return (
       <div className="App" >
         <CitySearch updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
         <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
+        <WarningAlert text={this.state.warningText} />
+        <EventList events={this.state.events} />
       </div>
     );
   }
