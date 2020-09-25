@@ -74,6 +74,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
+        <img src="https://auth-server-dev-serverlessdeploymentbucket-1gfi6z6bkqcu9.s3.eu-central-1.amazonaws.com/logo--script.svg" alt="Meetup Logo in pink" width="400px" className="logo"></img>
         <CitySearch updateEvents={this.updateEvents} />
         <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
         <ResponsiveContainer height={400}>
@@ -87,7 +88,7 @@ class App extends Component {
             <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
             <Scatter data={this.getData()}
-              fill="#8884d8" />
+              fill="#384464" />
           </ScatterChart>
         </ResponsiveContainer>
         <WarningAlert text={this.state.warningText} />

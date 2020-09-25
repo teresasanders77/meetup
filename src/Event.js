@@ -25,7 +25,7 @@ class Event extends Component {
     {
       name: "Available spots", value: (event.rsvp_limit - event.yes_rsvp_count)
     }];
-    const colors = ["#FF0000", "#008000"];
+    const colors = ["#384464", "rgb(246, 64, 96)"];
 
     return (
       <div className="event">
@@ -42,17 +42,19 @@ class Event extends Component {
           <div className="eventDetails">
             <h3>Event Description: </h3>
             {event.rsvp_limit &&
-              <ResponsiveContainer height={150} width={250}>
-                <PieChart>
-                  <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={32} label>
-                    {
-                      data.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} />))
-                    }
-                  </Pie>
-                  <Legend iconSize={10} iconType="circle" layout="horizontal" verticalAlign="bottom" align="center" />
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+              <div className="chart">
+                <ResponsiveContainer height={150} width={250}>
+                  <PieChart>
+                    <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={32} label>
+                      {
+                        data.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} />))
+                      }
+                    </Pie>
+                    <Legend iconSize={10} iconType="circle" layout="horizontal" verticalAlign="bottom" align="center" />
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
             }
             <p className="event__Details--description" dangerouslySetInnerHTML={{ __html: this.props.event.description }} />
           </div>}
