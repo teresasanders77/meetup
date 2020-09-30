@@ -17,7 +17,7 @@ describe('show/hide an event details', () => {
     await page.waitForSelector('.event');
 
 
-  });
+  }, 30000);
 
   afterAll(() => {
     browser.close();
@@ -85,6 +85,3 @@ describe('filter events by city', () => {
   });
 
 })
-
-
-
