@@ -9,7 +9,7 @@ describe('show/hide an event details', () => {
       headless: false,
       slowMo: 250, // slow down by 250ms
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+      //executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
     });
     page = await browser.newPage();
     await page.goto('http://localhost:3000/');
@@ -53,7 +53,7 @@ describe('filter events by city', () => {
       headless: false,
       slowMo: 250, // slow down by 250ms
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+      //executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
     });
     page = await browser.newPage();
     await page.goto('http://localhost:3000/');
@@ -61,7 +61,7 @@ describe('filter events by city', () => {
     await page.waitForSelector('.event');
 
 
-  });
+  }, 30000);
 
   afterAll(() => {
     browser.close();
